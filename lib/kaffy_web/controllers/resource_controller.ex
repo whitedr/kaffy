@@ -318,7 +318,6 @@ defmodule KaffyWeb.ResourceController do
         "id" => id,
         "action_key" => action_key
       }) do
-    
     my_resource = Kaffy.Utils.get_resource(conn, context, resource)
     entry = Kaffy.ResourceQuery.fetch_resource(conn, my_resource, id)
     actions = Kaffy.ResourceAdmin.resource_actions(my_resource, conn)
@@ -346,7 +345,7 @@ defmodule KaffyWeb.ResourceController do
       ) do
     my_resource = Kaffy.Utils.get_resource(conn, context, resource)
     action_key = String.to_existing_atom(action_key)
-    ids = Map.get(params, "ids", "") |> String.split(",")
+    ids = Map.get(params, "ids", "") |> String.split(",") |> Enum.filter(&(&1 != ""))
     entries = Kaffy.ResourceQuery.fetch_list(my_resource, ids)
     actions = Kaffy.ResourceAdmin.list_actions(my_resource, conn)
     [action_record] = Keyword.get_values(actions, action_key)
