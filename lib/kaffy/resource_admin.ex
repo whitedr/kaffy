@@ -183,7 +183,6 @@ defmodule Kaffy.ResourceAdmin do
 
           schema_struct
           |> Ecto.Changeset.cast(changes, form_fields)
-          |> Ecto.Changeset.change(changes)
       end
 
     Utils.get_assigned_value_or_default(
@@ -224,9 +223,6 @@ defmodule Kaffy.ResourceAdmin do
 
           entry
           |> Ecto.Changeset.cast(changes, form_fields)
-          |> Ecto.Changeset.change(changes)
-
-          Ecto.Changeset.change(entry, changes)
       end
 
     Utils.get_assigned_value_or_default(
